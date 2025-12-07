@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Solar System Simulation</h1>
+            <div class="controls">
+                <button id="playPauseBtn">Pause</button>
+                <label>
+                    Speed:
+                    <input type="range" id="speedSlider" min="0.1" max="5" step="0.1" value="1">
+                    <span id="speedValue">1.0x</span>
+                </label>
+                <label>
+                    Zoom:
+                    <input type="range" id="zoomSlider" min="0.5" max="3" step="0.1" value="1">
+                    <span id="zoomValue">1.0x</span>
+                </label>
+                <label>
+                    Gravity:
+                    <input type="range" id="gravitySlider" min="0.01" max="1" step="0.01" value="0.62">
+                    <span id="gravityValue">0.62</span>
+                </label>
+                <label>
+                    Physics:
+                    <select id="physicsModeSelect">
+                        <option value="n-body">N-Body</option>
+                        <option value="simplified">Simplified</option>
+                    </select>
+                </label>
+                <label>
+                    Collisions:
+                    <select id="collisionModeSelect">
+                        <option value="off">Off</option>
+                        <option value="merge">Merge</option>
+                        <option value="elastic">Elastic</option>
+                        <option value="inelastic">Inelastic</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" id="showMoonConnections"> Show Moon Connections
+                </label>
+                <label>
+                    <input type="checkbox" id="showAccelerationVectors"> Acceleration Vectors
+                </label>
+                <label>
+                    Vector Scale:
+                    <input type="range" id="vectorScaleSlider" min="0.1" max="5" step="0.1" value="1">
+                    <span id="vectorScaleValue">1.0x</span>
+                </label>
+                <button id="addStarBtn">Add Star</button>
+                <button id="addPlanetBtn">Add Planet</button>
+                <button id="resetBtn">Reset</button>
+                <button id="resetSettingsBtn">Reset Settings</button>
+            </div>
+        </header>
+        <canvas id="solarSystemCanvas"></canvas>
+        <div class="info">
+            <p>Click and drag to pan the view | Click on planets/sun to edit properties</p>
+        </div>
+    </div>
+    
+    <!-- Property Editor Panel -->
+    <div id="propertyEditor" class="property-editor" style="display: none;">
+        <div class="editor-header">
+            <h3 id="editorName">Planet</h3>
+            <button id="editorCloseBtn" class="close-btn">&times;</button>
+        </div>
+        <form id="propertyEditorForm" class="editor-form">
+            <div class="form-group">
+                <label for="editorMass">Mass:</label>
+                <input type="number" id="editorMass" step="0.1" min="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="editorVx">Velocity X:</label>
+                <input type="number" id="editorVx" step="0.001" required>
+            </div>
+            <div class="form-group">
+                <label for="editorVy">Velocity Y:</label>
+                <input type="number" id="editorVy" step="0.001" required>
+            </div>
+            <div class="form-group">
+                <label for="editorX">Position X:</label>
+                <input type="number" id="editorX" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="editorY">Position Y:</label>
+                <input type="number" id="editorY" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="editorRadius">Radius:</label>
+                <input type="number" id="editorRadius" step="0.5" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="editorColor">Color:</label>
+                <input type="color" id="editorColor" required>
+            </div>
+            <button type="submit" class="apply-btn">Apply Changes</button>
+            <button type="button" id="createMoonBtn" class="create-moon-btn">Create Moon</button>
+            <button type="button" id="deleteBodyBtn" class="delete-body-btn">Delete Body</button>
+        </form>
+    </div>
+    
+    <script src="solarSystem.js"></script>
+</body>
+</html>
+
